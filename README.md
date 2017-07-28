@@ -43,5 +43,5 @@ devtools::install_github('nimble-dev/gprofiler')
 
 ```r
 library(gprofiler)
-profile(my_expensive_function(100000))   # On commpletion, shows results in a web browser.
+profile(my_expensive_function(100000))   # On completion, shows results in a web browser.
 ```
