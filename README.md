@@ -6,23 +6,33 @@ A wrapper around the
 
 ## Installation
 
-### Step 1. Install Prerequisites
+### 1. Install `google-perftools` and `pprof`
 
 Ubuntu Linux
 ```sh
 sudo apt-get install libgoogle-perftools-dev
-sudo apt-get install golang-go                # In case you don't have go installed.
-export GOPATH=$HOME/go                        # Probably add this to your .bash_profile.
+
+sudo apt-get install golang-go    # In case you don't have go installed.
+export GOPATH=$HOME/go            # Add this to your .bash_profile.
+export PATH=$PATH:$GOPATH/bin     # Add this to your .bash_profile.
 go get github.com/google/pprof
 ```
 
 OS X
 ```sh
-brew install google-perftools binutils
-sudo ln -s /usr/local/bin/gobjdump /usr/local/bin/objdump
+brew install google-perftools
+
+brew install binutils                                        # For gobjdump.
+sudo ln -s /usr/local/bin/gobjdump /usr/local/bin/objdump    # Needed by pprof.
+
+brew install go --cross-compile-common    # In case you don't have go installed.
+export GOPATH=$HOME/go                    # Add this to your .bash_profile.
+export PATH=$PATH:$GOPATH/bin             # Add this to your .bash_profile.
+go get github.com/google/pprof
+sudo mv /usr/local/bin/pprof /usr/local/bin/pprof.pl  # Ignore the older pprof.
 ```
 
-### Step 2. Install the R Package
+### 2. Install the `gprofiler` R Package
 
 ```r
 library(devtools)
