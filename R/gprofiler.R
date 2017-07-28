@@ -25,6 +25,14 @@ profile <- function(expr, filename = NULL) {
     ProfilerStart(filename)
     result <- eval(expr)
     ProfilerStop()
-    system2('pprof', c('-web', file.path(R.home('bin'), 'R'), filename))
+
+    # Visualize profiling data, if possible.
+    if (nchar(Sys.which('pprof'))) {
+        system2('pprof', c('-web', file.path(R.home('bin'), 'R'), filename))
+    } else if (nchar(Sys.which('google-pprof'))) {
+        system2('google-pprof', c('-web', file.path(R.home('bin'), 'R'), filename))
+    } else {
+        cat('See', filename, '\n')
+    }
     return(result)
 }
