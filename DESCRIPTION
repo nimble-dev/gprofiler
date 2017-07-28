@@ -1,0 +1,13 @@
+Package: gprofiler
+Type: Package
+Title: C++ Profiler using Google perftools and pprof.
+Version: 0.1.0
+Author: Fritz Obermeyer
+Maintainer: Fritz Obermeyer <fritz.obermeyer@gmail.com>
+Description: gprofiler is a thin wrapper around Google's CPU profiler
+    https://github.com/gperftools/gperftools.
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
+NeedsCompilation: yes
+RoxygenNote: 5.0.1
