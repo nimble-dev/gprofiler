@@ -18,10 +18,9 @@ go get github.com/google/pprof
 
 OS X
 ```sh
-TODO(fritzo) Figure out how to set up on OS X.
+brew install google-perftools binutils
+sudo ln -s /usr/local/bin/gobjdump /usr/local/bin/objdump
 ```
-
-Windows is not supported by this profiling tool.
 
 ### Step 2. Install the R Package
 
@@ -34,6 +33,5 @@ devtools::install_github('nimble-dev/gprofiler')
 
 ```r
 library(gprofiler)
-
 profile(my_expensive_function(100000))   # On commpletion, shows results in a web browser.
 ```
