@@ -1,7 +1,7 @@
 # gprofiler
 
-A wrapper around the
-[Google perftools profiler](https://github.com/gperftools/gperftools) and
+A wrapper around Google's
+[perftools profiler](https://github.com/gperftools/gperftools) and
 [pprof](https://github.com/google/pprof) visualizer.
 
 ## Installation
