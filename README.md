@@ -1,4 +1,4 @@
-# gprofiler
+# gprofiler - Profile the C++ behind your R code
 
 A wrapper around Google's
 [perftools profiler](https://github.com/gperftools/gperftools) and
