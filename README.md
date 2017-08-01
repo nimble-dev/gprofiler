@@ -11,6 +11,11 @@ library(gprofiler)
 profile(my_expensive_function(100000))   # On completion, shows results in a web browser.
 ```
 
+Results are only meaningful if `my_expensive_function(100000)` takes longer than around 10 seconds.
+
+The `gprofiler::profile()` function profiles only C++ code.
+To profile R code, use the [profviz](https://rstudio.github.io/profvis/) package instead.
+
 ## Installation
 
 ### 1. Install `google-perftools` and `pprof`
