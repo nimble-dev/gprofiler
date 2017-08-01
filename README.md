@@ -4,6 +4,13 @@ A wrapper around Google's
 [perftools profiler](https://github.com/gperftools/gperftools) and
 [pprof](https://github.com/google/pprof) visualizer.
 
+## Usage
+
+```r
+library(gprofiler)
+profile(my_expensive_function(100000))   # On completion, shows results in a web browser.
+```
+
 ## Installation
 
 ### 1. Install `google-perftools` and `pprof`
@@ -37,11 +44,4 @@ sudo mv /usr/local/bin/pprof /usr/local/bin/pprof.pl  # Ignore the older pprof.
 ```r
 library(devtools)
 devtools::install_github('nimble-dev/gprofiler')
-```
-
-## Usage
-
-```r
-library(gprofiler)
-profile(my_expensive_function(100000))   # On completion, shows results in a web browser.
 ```
