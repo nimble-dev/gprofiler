@@ -27,10 +27,13 @@ profile <- function(expr, filename = NULL) {
     ProfilerStop()
 
     # Visualize profiling data, if possible.
+    libs <- as.vector(sapply(getLoadedDLLs(), '[[', i = 'path'))
+    libs <- libs[grepl('^/.*\\.so$', libs)]
+    libs <- c(file.path(R.home('bin'), 'R'), libs)
     if (nchar(Sys.which('pprof'))) {
-        system2('pprof', c('-web', file.path(R.home('bin'), 'R'), filename))
+        system2('pprof', c('-web', filename, libs))
     } else if (nchar(Sys.which('google-pprof'))) {
-        system2('google-pprof', c('-web', file.path(R.home('bin'), 'R'), filename))
+        system2('google-pprof', c('-web', filename, libs))
     } else {
         cat('See', filename, '\n')
     }
