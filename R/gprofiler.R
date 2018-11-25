@@ -27,7 +27,7 @@ profile <- function(expr, filename = NULL, out_format = c("pdf", "svg", "dot")) 
     result <- eval(expr)
     ProfilerStop()
 
-    outfile <- tempfile("gprofiler", fileext = "svg")
+    outfile <- tempfile("gprofiler", fileext = paste0(".", out_format))
 
     # Visualize profiling data, if possible.
     if (nchar(Sys.which('pprof'))) {
@@ -40,6 +40,6 @@ profile <- function(expr, filename = NULL, out_format = c("pdf", "svg", "dot")) 
     } else {
         cat('See', filename, '\n')
     }
-    message("svg saved in: ", outfile)
+    message("saved in: ", outfile)
     invisible(result)
 }
