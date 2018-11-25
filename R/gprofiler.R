@@ -32,15 +32,15 @@ profile <- function(expr,
 
     # Visualize profiling data, if possible.
     if (nchar(Sys.which('pprof'))) {
-        system2('pprof', c(paste0("--", out_format), file.path(R.home('bin'), 'Rscript'), out_filename),
-                stdout = outfile)
+        system2('pprof', c(paste0("--", out_format), file.path(R.home('bin'), 'Rscript'), prof_filename),
+                stdout = out_filename)
     } else if (nchar(Sys.which('google-pprof'))) {
         system2('google-pprof',
-                c(paste0("--", out_format), file.path(R.home('bin'), 'Rscript'), out_filename),
-                stdout = outfile)
+                c(paste0("--", out_format), file.path(R.home('bin'), 'Rscript'), prof_filename),
+                stdout = out_filename)
     } else {
         cat('See profile data in ', prof_filename, '\n')
     }
-    message("saved in: ", outfile)
+    message("saved in: ", out_filename)
     invisible(result)
 }
