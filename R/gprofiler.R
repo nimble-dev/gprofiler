@@ -26,13 +26,19 @@ profile <- function(expr, filename = NULL) {
     result <- eval(expr)
     ProfilerStop()
 
+    outfile <- tempfile("gprofiler", fileext = "svg")
+
     # Visualize profiling data, if possible.
     if (nchar(Sys.which('pprof'))) {
-        system2('pprof', c(file.path(R.home('bin'), 'Rscript'), filename))
+        system2('pprof', c("--svg", file.path(R.home('bin'), 'Rscript'), filename),
+                stdout = outfile)
     } else if (nchar(Sys.which('google-pprof'))) {
-        system2('google-pprof', c(file.path(R.home('bin'), 'Rscript'), filename))
+        system2('google-pprof',
+                c("--svg", file.path(R.home('bin'), 'Rscript'), filename),
+                stdout = outfile)
     } else {
         cat('See', filename, '\n')
     }
-    return(result)
+    message("svg saved in: ", outfile)
+    invisible(result)
 }
