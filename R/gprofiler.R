@@ -28,9 +28,9 @@ profile <- function(expr, filename = NULL) {
 
     # Visualize profiling data, if possible.
     if (nchar(Sys.which('pprof'))) {
-        system2('pprof', c('-web', file.path(R.home('bin'), 'R'), filename))
+        system2('pprof', c(file.path(R.home('bin'), 'Rscript'), filename))
     } else if (nchar(Sys.which('google-pprof'))) {
-        system2('google-pprof', c('-web', file.path(R.home('bin'), 'R'), filename))
+        system2('google-pprof', c(file.path(R.home('bin'), 'Rscript'), filename))
     } else {
         cat('See', filename, '\n')
     }
