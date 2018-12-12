@@ -18,21 +18,28 @@ ProfilerStop <- function() {
 #' @export
 #' @param expr The expression to be profiled.
 #' @param filename An optional filename to write profiling information to.
-profile <- function(expr, filename = NULL) {
-    if (is.null(filename)) {
-        filename <- file.path(tempdir(), 'gprofiler.out')
+profile <- function(expr, prof_filename = NULL,
+                    fmt = c("pdf", "svg", "dot"),
+                    out_filename = tempfile("gp", fileext = paste0(".", fmt))) {
+    fmt <- match.arg(fmt)
+    if (is.null(prof_filename)) {
+        prof_filename <- file.path(tempdir(), 'gprofiler.out')
     }
-    ProfilerStart(filename)
+    ProfilerStart(prof_filename)
     result <- eval(expr)
     ProfilerStop()
-
+    args <- c(paste0("--", fmt),
+              file.path(R.home('bin'), 'Rscript'),
+              prof_filename)
     # Visualize profiling data, if possible.
     if (nchar(Sys.which('pprof'))) {
-        system2('pprof', c('-web', file.path(R.home('bin'), 'R'), filename))
+        system2('pprof', args, stdout = out_filename)
     } else if (nchar(Sys.which('google-pprof'))) {
-        system2('google-pprof', c('-web', file.path(R.home('bin'), 'R'), filename))
+        system2('google-pprof', args, stdout = out_filename)
     } else {
-        cat('See', filename, '\n')
+        cat('See profile data in ', prof_filename, '\n')
+        return(invisible(result))
     }
-    return(result)
+    message("Results saved in: ", out_filename)
+    invisible(result)
 }
